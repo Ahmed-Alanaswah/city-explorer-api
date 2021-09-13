@@ -14,7 +14,7 @@ This Project connects the user to API servers to get data related to cities, hen
 12-09-2021 8:01 -Application first feature edits.
 
 **Credit and Collaborations**
-https://app.netlify.com/sites/ahmed-alanaswah-location-explorer/overview
+https://ahmed-alanaswah-location-explorer.netlify.app
 
 **Lab 06**
 **Name of feature**: location explorer to search about location and show data.

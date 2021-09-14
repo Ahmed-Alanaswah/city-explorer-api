@@ -10,23 +10,8 @@ const weatherData = require("./data/weather.json");
 const PORT = process.env.PORT;
 
 app.get("/", (req, res) => {
-	res.status(200).send("hello world");
+	res.status(200).send("hello ");
 });
-
-// app.get("/data", (req, res) => {
-// 	let city = weatherData[2];
-// 	let forecastDays = city.data.map((day) => {
-// 		return {
-// 			date: day.valid_date,
-// 			description: day.weather.description,
-// 		};
-// 	});
-// 	let costumResponse = {
-// 		forecast: forecastDays,
-// 		city_name: city.city_name,
-// 	};
-// 	res.status(200).json(costumResponse);
-// });
 
 app.get("/weather-data", (req, res) => {
 	let lat = Number(req.query.lat);

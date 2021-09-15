@@ -39,11 +39,10 @@ app.get("/", (req, res) => {
 // 	}
 // });
 
+//weartherbit api (crateing endpiont)
 app.listen(PORT, () => {
 	console.log(`listening on port ${PORT}`);
 });
-
-//weartherbit api (crateing endpiont)
 
 let handleWeather = async (req, res) => {
 	let city_name = req.query.searchQuery;
@@ -62,5 +61,49 @@ class ForeCast {
 	constructor(date, description) {
 		this.date = date;
 		this.description = description;
+	}
+}
+
+//movie api (crateing endpiont)
+
+let handleMovies = async (req, res) => {
+	let search_name = req.query.query;
+
+	let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIES_API_KEY}&query=${search_name}`;
+	let axiosResponse = await axios.get(url);
+
+	let moviesData = axiosResponse.data;
+	let cleanedData = moviesData.results.map((item) => {
+		return new MovieCast(
+			item.title,
+			item.overview,
+			item.vote_average,
+			item.vote_count,
+			item.poster_path,
+			item.popularity,
+			item.release_date
+		);
+	});
+
+	res.status(200).json(cleanedData);
+};
+app.get("/movies", handleMovies);
+class MovieCast {
+	constructor(
+		title,
+		overview,
+		vote_average,
+		vote_count,
+		poster_path,
+		popularity,
+		release_date
+	) {
+		this.title = title;
+		this.overview = overview;
+		this.vote_average = vote_average;
+		this.vote_count = vote_count;
+		this.poster_path = `http://image.tmdb.org/t/p/w500${poster_path}`;
+		this.popularity = popularity;
+		this.release_date = release_date;
 	}
 }
